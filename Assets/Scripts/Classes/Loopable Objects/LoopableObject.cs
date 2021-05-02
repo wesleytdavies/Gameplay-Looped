@@ -43,18 +43,7 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
     }
     private float _speed;
 
-    public LoopableMovement MovementFunction //the movement algorithm the object adheres to
-    {
-        get
-        {
-            return _movementFunction;
-        }
-        protected set
-        {
-            _movementFunction = value;
-        }
-    }
-    private LoopableMovement _movementFunction;
+    protected LoopableMovement movementFunction; //the movement algorithm the object adheres to
 
     protected LinearMovement Linear
     {
@@ -77,8 +66,8 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
     private void Awake()
     {
         Initialize();
-        forwardCoroutine = MovementFunction.ForwardMovement(this);
-        reverseCoroutine = MovementFunction.ReverseMovement(this);
+        forwardCoroutine = movementFunction.ForwardMovement(this);
+        reverseCoroutine = movementFunction.ReverseMovement(this);
     }
 
     private void Start()

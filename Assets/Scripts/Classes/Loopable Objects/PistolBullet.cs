@@ -9,6 +9,6 @@ public class PistolBullet : LoopableObject
         StartPosition = transform.position;
         StartDirection = Vector2.right;
         Speed = .05f;
-        MovementFunction = Linear;
+        movementFunction = Linear;
     }
 }
