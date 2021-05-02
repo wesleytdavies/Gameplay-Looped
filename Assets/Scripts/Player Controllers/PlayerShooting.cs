@@ -5,30 +5,28 @@ using UnityEngine;
 public class PlayerShooting : MonoBehaviour
 {
     private Weapon currentWeapon;
-    public Pistol pistol = new Pistol(); //TODO: add the weapon component to the player instead
+    private GameObject currentWeaponObject;
+    private Inventory inventory;
+
+    private void Awake()
+    {
+        inventory = GetComponent<Inventory>();
+    }
 
     void Start()
     {
-        currentWeapon = pistol;
-        //TODO: get rid of these commented lines, they're just for testing
-        //currentWeapon.Initialize();
-        //Debug.Log(currentWeapon.MagazineSize);
+        currentWeaponObject = inventory.WeaponInventory[0];
+        currentWeapon = currentWeaponObject.GetComponent<Weapon>();
     }
 
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            //if (bulletCount > 0)
+            if (currentWeapon.bulletCount > 0)
             {
-                float bulletAngle = Vector2.SignedAngle(transform.position, Input.mousePosition);
-                FireBullet(bulletAngle);
+                currentWeapon.Fire();
             }
         }
-    }
-
-    void FireBullet(float angle)
-    {
-
     }
 }

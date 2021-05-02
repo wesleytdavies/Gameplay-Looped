@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PistolBullet : LoopableObject
 {
+    public static string prefabName = "Pistol Bullet"; //name of prefab in the Resources folder
+
     public override void Initialize()
     {
         StartPosition = transform.position;
-        StartDirection = Vector2.right;
         Speed = .05f;
         movementFunction = Linear;
     }

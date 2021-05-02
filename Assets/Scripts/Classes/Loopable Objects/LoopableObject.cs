@@ -6,55 +6,32 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
 {
     public Vector2 StartPosition //the position where the object begins its loop
     {
-        get
-        {
-            return _startPosition;
-        }
-        protected set
-        {
-            _startPosition = value;
-        }
+        get => _startPosition;
+        protected set => _startPosition = value;
     }
     private Vector2 _startPosition;
 
-    public Vector2 StartDirection //the direction of the object when it begins its loop
-    {
-        get
-        {
-            return _startDirection;
-        }
-        protected set
-        {
-            _startDirection = value;
-        }
-    }
-    private Vector2 _startDirection;
-
     public float Speed //the speed at which the object travels
     {
-        get
-        {
-            return _speed;
-        }
-        protected set
-        {
-            _speed = value;
-        }
+        get => _speed;
+        protected set => _speed = value;
     }
     private float _speed;
 
+    public float HalfLoopDuration //the duration of one way in the time loop in seconds
+    {
+        get =>_halfLoopDuration;
+        protected set => _halfLoopDuration = value;
+    }
+    private float _halfLoopDuration = 3f; //the default one way time is 3 seconds
+
     protected LoopableMovement movementFunction; //the movement algorithm the object adheres to
 
+    //references to all movement functions:
     protected LinearMovement Linear
     {
-        get
-        {
-            return _linear;
-        }
-        private set
-        {
-            _linear = value;
-        }
+        get => _linear;
+        private set => _linear = value;
     }
     private LinearMovement _linear = new LinearMovement();
 
@@ -77,7 +54,7 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
 
     private void FixedUpdate()
     {
-        internalTime += Time.fixedDeltaTime;
+        internalTime += Time.fixedDeltaTime; //increment time at a fixed rate to ensure coroutine timings are perfect
     }
 
     IEnumerator TimeLoop()
@@ -86,19 +63,21 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
         {
             MoveForward();
             internalTime = 0f; //reset internal time
-            yield return new WaitUntil(() => internalTime >= TimeManager.HalfLoopDuration); //wait until half a loop has elapsed
+            yield return new WaitUntil(() => internalTime >= HalfLoopDuration); //wait until half a loop has elapsed
             MoveReverse();
             internalTime = 0f; //reset internal time
-            yield return new WaitUntil(() => internalTime >= TimeManager.HalfLoopDuration); //wait until half a loop has elapsed
+            yield return new WaitUntil(() => internalTime >= HalfLoopDuration); //wait until half a loop has elapsed
         }
     }
 
     public abstract void Initialize();
+
     public virtual void MoveForward()
     {
         StopCoroutine(reverseCoroutine);
         StartCoroutine(forwardCoroutine);
     }
+
     public virtual void MoveReverse()
     {
         StopCoroutine(forwardCoroutine);
