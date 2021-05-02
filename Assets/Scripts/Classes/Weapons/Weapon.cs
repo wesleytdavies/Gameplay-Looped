@@ -31,7 +31,7 @@ public abstract class Weapon : MonoBehaviour //base class for all weapons
 
     public virtual void Fire()
     {
-        Instantiate(bullet, transform.position, Quaternion.identity);
+        Instantiate(bullet, transform.position, transform.rotation);
         bulletCount--;
     }
 }
