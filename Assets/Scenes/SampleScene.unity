@@ -214,9 +214,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1032598919}
   - component: {fileID: 1032598918}
-  - component: {fileID: 1032598917}
   - component: {fileID: 1032598921}
   - component: {fileID: 1032598920}
+  - component: {fileID: 1032598923}
+  - component: {fileID: 1032598922}
+  - component: {fileID: 1032598917}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -233,10 +235,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1032598916}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad22e812b7c0a49789b90b6ef453863e, type: 3}
+  m_Script: {fileID: 11500000, guid: 6af90c40c3f5e45a9a5a103b65a44ca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
 --- !u!212 &1032598918
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -348,3 +349,29 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1032598922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032598916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab9a571c8c644e6a8120e8e91c21a67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pistol: {fileID: 0}
+--- !u!114 &1032598923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032598916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad22e812b7c0a49789b90b6ef453863e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5

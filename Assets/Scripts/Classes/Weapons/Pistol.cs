@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class Pistol : Weapon
 {
-    public override int MagazineSize()
+    private PistolBullet pistolBullet;
+
+    public override void Initialize()
     {
-        return 5;
-    }
-    public override int MagazineCount()
-    {
-        return 0;
-    }
-    public override float BulletSpeed()
-    {
-        return 0;
+        MagazineSize = 5;
+        pistolBullet = gameObject.AddComponent<PistolBullet>();
+        BulletType = pistolBullet;
+        RateOfFire = 5f;
     }
 }
