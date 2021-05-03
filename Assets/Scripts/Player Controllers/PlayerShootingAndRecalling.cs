@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShooting : MonoBehaviour
+public class PlayerShootingAndRecalling : MonoBehaviour
 {
     private Weapon currentWeapon;
     private GameObject currentWeaponObject;

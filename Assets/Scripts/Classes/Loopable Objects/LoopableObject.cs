@@ -23,7 +23,7 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
         get =>_halfLoopDuration;
         protected set => _halfLoopDuration = value;
     }
-    private float _halfLoopDuration = 2f; //the default one way time is 2 seconds
+    private float _halfLoopDuration = 1f; //the default one way time is 1 seconds
 
     protected LoopableMovement movementFunction; //the movement algorithm the object adheres to
 
@@ -38,7 +38,12 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
     private IEnumerator forwardCoroutine;
     private IEnumerator reverseCoroutine;
 
-    private float internalTime; //the lifespan of the object
+    public float InternalTime //the lifespan of the object
+    {
+        get => _internalTime;
+        private set => _internalTime = value;
+    }
+    private float _internalTime;
 
     private void Awake()
     {
@@ -54,19 +59,22 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
 
     private void FixedUpdate()
     {
-        internalTime += Time.fixedDeltaTime; //increment time at a fixed rate to ensure coroutine timings are perfect
+        InternalTime += Time.fixedDeltaTime;
+        //InternalTime += Mathf.Clamp(Time.fixedDeltaTime, 0f, HalfLoopDuration); //increment time at a fixed rate to ensure coroutine timings are perfect. Clamp to prevent internal time from ever surpassing half loop duration, which would mess up the easing functions
     }
 
     IEnumerator TimeLoop()
     {
         while (true)
         {
+            Debug.Log(transform.position);
+            InternalTime = 0f; //reset internal time
             MoveForward();
-            internalTime = 0f; //reset internal time
-            yield return new WaitUntil(() => internalTime >= HalfLoopDuration); //wait until half a loop has elapsed
+            yield return new WaitUntil(() => InternalTime >= HalfLoopDuration); //wait until half a loop has elapsed
+            Debug.Log(transform.position);
+            InternalTime = 0f; //reset internal time
             MoveReverse();
-            internalTime = 0f; //reset internal time
-            yield return new WaitUntil(() => internalTime >= HalfLoopDuration); //wait until half a loop has elapsed
+            yield return new WaitUntil(() => InternalTime >= HalfLoopDuration); //wait until half a loop has elapsed
         }
     }
 

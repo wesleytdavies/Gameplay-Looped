@@ -38,4 +38,9 @@ public abstract class Weapon : MonoBehaviour //base class for all weapons
         Instantiate(bullet, barrel.position, transform.rotation);
         bulletCount--;
     }
+
+    public virtual void Recall() //if at the origin of the weapon's fired bullets, can be recalled and loaded back into magazine
+    {
+        bulletCount++;
+    }
 }
