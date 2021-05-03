@@ -9,7 +9,7 @@ public class PistolBullet : LoopableObject
     public override void Initialize()
     {
         StartPosition = transform.position;
-        Speed = .05f;
+        Speed = .2f;
         movementFunction = Linear;
     }
 }

@@ -23,7 +23,7 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
         get =>_halfLoopDuration;
         protected set => _halfLoopDuration = value;
     }
-    private float _halfLoopDuration = 3f; //the default one way time is 3 seconds
+    private float _halfLoopDuration = 2f; //the default one way time is 2 seconds
 
     protected LoopableMovement movementFunction; //the movement algorithm the object adheres to
 
