@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PistolBullet : LoopableObject
 {
-    public static string prefabName = "Pistol Bullet"; //name of prefab in the Resources folder
+    public static readonly string prefabName = "Pistol Bullet"; //name of prefab in the Resources folder
 
     public override void Initialize()
     {

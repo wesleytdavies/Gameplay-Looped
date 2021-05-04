@@ -45,6 +45,15 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
     }
     private float _internalTime;
 
+    public bool IsReversing //whether the object is reversing on its loop
+    {
+        get => _isReversing;
+        private set => _isReversing = value;
+    }
+    private bool _isReversing;
+
+    public GameObject originator; //the gameobject that brought this loopable object into existence (i.e. the gun that fired this bullet)
+
     private void Awake()
     {
         Initialize();
@@ -67,13 +76,13 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
     {
         while (true)
         {
-            Debug.Log(transform.position);
             InternalTime = 0f; //reset internal time
             MoveForward();
+            IsReversing = false;
             yield return new WaitUntil(() => InternalTime >= HalfLoopDuration); //wait until half a loop has elapsed
-            Debug.Log(transform.position);
             InternalTime = 0f; //reset internal time
             MoveReverse();
+            IsReversing = true;
             yield return new WaitUntil(() => InternalTime >= HalfLoopDuration); //wait until half a loop has elapsed
         }
     }

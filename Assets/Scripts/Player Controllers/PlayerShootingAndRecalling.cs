@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerShootingAndRecalling : MonoBehaviour
 {
+    private static readonly float recallRadius = 1f; //how far away the bullet can be from the barrel to be recalled
+
     private Weapon currentWeapon;
     private GameObject currentWeaponObject;
     private Inventory inventory;
@@ -26,6 +28,23 @@ public class PlayerShootingAndRecalling : MonoBehaviour
             if (currentWeapon.bulletCount > 0)
             {
                 currentWeapon.Fire();
+            }
+        }
+        if (Input.GetButtonDown("Fire2"))
+        {
+            Collider2D[] nearbyObjects = Physics2D.OverlapCircleAll(currentWeapon.Barrel.position, recallRadius);
+            for (int i = 0; i < nearbyObjects.Length; i++)
+            {
+                if (nearbyObjects[i].GetComponent<LoopableObject>() != null)
+                {
+                    if (nearbyObjects[i].GetComponent<LoopableObject>().IsReversing)
+                    {
+                        if (nearbyObjects[i].GetComponent<LoopableObject>().originator = currentWeaponObject)
+                        {
+                            currentWeapon.Recall(nearbyObjects[i].gameObject);
+                        }
+                    }
+                }
             }
         }
     }
