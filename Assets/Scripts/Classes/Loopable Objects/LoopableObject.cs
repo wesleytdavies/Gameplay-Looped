@@ -52,6 +52,13 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
     }
     private bool _isReversing;
 
+    public float DamagePerSecond //how much damage this object inflicts per second of overlap
+    {
+        get => _damagePerSecond;
+        protected set => _damagePerSecond = value;
+    }
+    private float _damagePerSecond;
+
     public GameObject originator; //the gameobject that brought this loopable object into existence (i.e. the gun that fired this bullet)
 
     private void Awake()

@@ -11,5 +11,6 @@ public class PistolBullet : LoopableObject
         StartPosition = transform.position;
         Speed = .25f;
         movementFunction = Linear;
+        DamagePerSecond = 1f;
     }
 }

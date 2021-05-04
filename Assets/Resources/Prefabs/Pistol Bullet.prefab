@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3407919346794885179}
   - component: {fileID: -925278439575907429}
   - component: {fileID: -226461024454818130}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pistol Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af90c40c3f5e45a9a5a103b65a44ca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  originator: {fileID: 0}
 --- !u!58 &-226461024454818130
 CircleCollider2D:
   m_ObjectHideFlags: 0
