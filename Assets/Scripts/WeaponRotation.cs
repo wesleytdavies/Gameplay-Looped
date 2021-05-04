@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WeaponRotation : MonoBehaviour
 {
+    [SerializeField] private GameObject holder;
+
     void Start()
     {
         
@@ -33,5 +35,10 @@ public class WeaponRotation : MonoBehaviour
             flipScale.y = 1;
             transform.localScale = flipScale;
         }
+    }
+
+    private void LateUpdate()
+    {
+        transform.position = holder.transform.position;
     }
 }
