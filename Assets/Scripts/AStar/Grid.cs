@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //credit to Sebastian Lague on YouTube for pathfinding tutorials
-
 public class Grid : MonoBehaviour
 {
     public bool displayGridGizmos;

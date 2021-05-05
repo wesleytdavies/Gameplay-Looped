@@ -4,7 +4,6 @@ using UnityEngine;
 using System;
 
 //credit to Sebastian Lague on YouTube for pathfinding tutorials
-
 public class PathRequestManager : MonoBehaviour
 {
     Queue<PathRequest> pathRequestQueue = new Queue<PathRequest>();

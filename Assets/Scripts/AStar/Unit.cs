@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //credit to Sebastian Lague on YouTube for pathfinding tutorials
-
 public class Unit : MonoBehaviour
 {
-    public Transform target;
+    [SerializeField] private Transform target;
     public float speed;
     Vector3[] path;
     int targetIndex;
     private Rigidbody2D rb;
 
-    public LayerMask playerMask;
-    public LayerMask unwalkableMask;
-    public float enemySightDistance;
+    [SerializeField] private LayerMask playerMask;
+    [SerializeField] private LayerMask unwalkableMask;
+    [SerializeField] private float enemySightDistance;
 
     private void Awake()
     {

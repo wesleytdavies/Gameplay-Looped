@@ -4,7 +4,6 @@ using UnityEngine;
 using System;
 
 //credit to Sebastian Lague on YouTube for pathfinding tutorials
-
 public class Pathfinding : MonoBehaviour
 {
     PathRequestManager requestManager;

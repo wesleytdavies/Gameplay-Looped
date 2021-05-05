@@ -699,7 +699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1032598919}
-  speed: 0.6
+  speed: 0.5
   playerMask:
     serializedVersion: 2
     m_Bits: 0
