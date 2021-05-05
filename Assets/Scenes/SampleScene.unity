@@ -494,6 +494,7 @@ GameObject:
   - component: {fileID: 1032598922}
   - component: {fileID: 1032598917}
   - component: {fileID: 1032598924}
+  - component: {fileID: 1032598925}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -665,6 +666,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHitPoints: 100
   currentHitPoints: 0
+--- !u!114 &1032598925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032598916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb0f717a40bb46d9ba6700e3f37a96c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraCatchUpSpeed: 4
+  followCursor: 1
+  cursorExtendLength: 2
 --- !u!1 &2102263558
 GameObject:
   m_ObjectHideFlags: 0

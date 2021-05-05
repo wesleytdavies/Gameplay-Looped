@@ -15,7 +15,7 @@ public class WeaponRotation : MonoBehaviour
     {
         //mouse rotation code based on this thread: https://answers.unity.com/questions/10615/rotate-objectweapon-towards-mouse-cursor-2d.html
         Vector3 mousePosition = Input.mousePosition;
-        mousePosition.z = 5.23f; //distance from screen to mouse
+        mousePosition.z = Camera.main.nearClipPlane; //distance from screen to mouse
         Vector3 objectPosition = Camera.main.WorldToScreenPoint(transform.position);
         mousePosition.x -= objectPosition.x;
         mousePosition.y -= objectPosition.y;
