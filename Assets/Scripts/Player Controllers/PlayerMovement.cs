@@ -9,11 +9,13 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveDirection;
 
     private Rigidbody2D rb;
+    private Animator animator;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         moveDirection = Vector2.zero;
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -77,6 +79,11 @@ public class PlayerMovement : MonoBehaviour
         if (isMoving)
         {
             rb.velocity = new Vector2(moveSpeed * moveDirection.x, moveSpeed * moveDirection.y);
+            animator.SetFloat("Walk Speed", 1f);
+        }
+        else
+        {
+            animator.SetFloat("Walk Speed", 0f);
         }
     }
 }

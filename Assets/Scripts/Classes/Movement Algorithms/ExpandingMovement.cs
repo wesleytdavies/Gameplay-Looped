@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LinearMovement : LoopableMovement //used for objects that move in a straight line at a constant speed
+public class ExpandingMovement : LoopableMovement //object expands, useful for explosions
 {
-    private Vector2 upVector;
+    Vector2 upVector;
 
     public override void Initialize(LoopableObject loopableObject)
     {
@@ -15,7 +15,7 @@ public class LinearMovement : LoopableMovement //used for objects that move in a
     {
         while (true)
         {
-            if(loopableObject.InternalTime <= loopableObject.HalfLoopDuration) //this must be in an if statement since the internal time goes one frame past the half loop duration which messes up the easing (object starts to move backwards before it has reversed)
+            if (loopableObject.InternalTime <= loopableObject.HalfLoopDuration) //this must be in an if statement since the internal time goes one frame past the half loop duration which messes up the easing (object starts to move backwards before it has reversed)
             {
                 Vector2 currentPosition = new Vector2(loopableObject.transform.position.x, loopableObject.transform.position.y);
                 float easingFactor = EaseOutQuadratic(loopableObject.InternalTime / loopableObject.HalfLoopDuration);
@@ -30,7 +30,7 @@ public class LinearMovement : LoopableMovement //used for objects that move in a
     {
         while (true)
         {
-            if(loopableObject.InternalTime <= loopableObject.HalfLoopDuration) //this must be in an if statement since the internal time goes one frame past the half loop duration which messes up the easing (object starts to move backwards before it has reversed)
+            if (loopableObject.InternalTime <= loopableObject.HalfLoopDuration) //this must be in an if statement since the internal time goes one frame past the half loop duration which messes up the easing (object starts to move backwards before it has reversed)
             {
                 Vector2 currentPosition = new Vector2(loopableObject.transform.position.x, loopableObject.transform.position.y);
                 float easingFactor = EaseInQuadratic(loopableObject.InternalTime / loopableObject.HalfLoopDuration);

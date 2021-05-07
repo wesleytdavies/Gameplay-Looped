@@ -34,6 +34,5 @@ public class CameraFollowing : MonoBehaviour
     private void LateUpdate()
     {
         mainCamera.transform.position = Vector3.Lerp(mainCamera.transform.position, targetPosition, cameraCatchUpSpeed * Time.deltaTime);
-        //mainCamera.transform.position = targetPosition;
     }
 }

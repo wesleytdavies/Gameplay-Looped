@@ -34,6 +34,12 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
         private set => _linear = value;
     }
     private LinearMovement _linear = new LinearMovement();
+    protected SpiralMovement Spiral
+    {
+        get => _spiral;
+        private set => _spiral = value;
+    }
+    private SpiralMovement _spiral = new SpiralMovement();
 
     private IEnumerator forwardCoroutine;
     private IEnumerator reverseCoroutine;
@@ -64,6 +70,7 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
     private void Awake()
     {
         Initialize();
+        movementFunction.Initialize(this);
         forwardCoroutine = movementFunction.ForwardMovement(this);
         reverseCoroutine = movementFunction.ReverseMovement(this);
     }
@@ -76,7 +83,6 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
     private void FixedUpdate()
     {
         InternalTime += Time.fixedDeltaTime;
-        //InternalTime += Mathf.Clamp(Time.fixedDeltaTime, 0f, HalfLoopDuration); //increment time at a fixed rate to ensure coroutine timings are perfect. Clamp to prevent internal time from ever surpassing half loop duration, which would mess up the easing functions
     }
 
     IEnumerator TimeLoop()

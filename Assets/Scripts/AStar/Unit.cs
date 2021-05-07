@@ -32,6 +32,7 @@ public class Unit : MonoBehaviour
             StopCoroutine("FollowPath");
             targetIndex = 0;
             path = newPath;
+
             StartCoroutine("FollowPath");
         }
     }
