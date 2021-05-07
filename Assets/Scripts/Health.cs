@@ -8,9 +8,16 @@ public class Health : MonoBehaviour
     public float currentHitPoints;
     private static readonly int damagingLayer = 8;
 
+    private SpriteRenderer spriteRenderer;
+    private Color baseColor; //the normal color of the sprite
+    private Color hitColor; //the color the sprite turns when hit
+
     void Start()
     {
         currentHitPoints = maxHitPoints;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        baseColor = spriteRenderer.color;
+        hitColor = Color.red;
     }
 
     void Update()
@@ -25,7 +32,13 @@ public class Health : MonoBehaviour
             if (collision.GetComponent<LoopableObject>() != null)
             {
                 currentHitPoints -= collision.GetComponent<LoopableObject>().DamagePerSecond;
+                spriteRenderer.color = hitColor;
             }
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        spriteRenderer.color = baseColor;
     }
 }
