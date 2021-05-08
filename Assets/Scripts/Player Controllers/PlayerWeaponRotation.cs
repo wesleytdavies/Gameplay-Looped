@@ -30,6 +30,7 @@ public class PlayerWeaponRotation : MonoBehaviour
         RotationAngle = Mathf.Atan2(mousePosition.y, mousePosition.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, RotationAngle));
 
+        /*
         Vector2 flipScale; //if y is negative, this object gets flipped horizontally
         if (RotationAngle >= 90 || RotationAngle <= -90)
         {
@@ -43,7 +44,9 @@ public class PlayerWeaponRotation : MonoBehaviour
             flipScale.y = 1;
             transform.localScale = flipScale;
         }
+        */
 
+        //put sprite either behind or in front of player
         if (RotationAngle >= 0 && RotationAngle <= 180)
         {
             weaponSpriteRenderer.sortingOrder = -1;

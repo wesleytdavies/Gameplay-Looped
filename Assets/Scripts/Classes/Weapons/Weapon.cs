@@ -49,11 +49,14 @@ public abstract class Weapon : MonoBehaviour //base class for all weapons
     }
     private bool _hasExcessEnergy = false;
 
+    private Animator animator;
+
     private void Awake()
     {
         Initialize();
         Barrel = gameObject.transform.Find(barrelName).transform; //finds the barrel's transform, which must be a child of weapon
         BulletCount = MagazineSize;
+        animator = GetComponent<Animator>();
     }
 
     public abstract void Initialize();
@@ -65,6 +68,7 @@ public abstract class Weapon : MonoBehaviour //base class for all weapons
         firedBullet.GetComponent<LoopableObject>().originator = gameObject; //sets this as the bullet's originator
         BulletCount--;
         StartCoroutine(FireCooldown());
+        StartCoroutine(FireAnimation());
     }
 
     public virtual void Recall(GameObject recalledBullet) //if facing one of this weapon's reversing bullets, can recall and load it back into magazine
@@ -72,6 +76,7 @@ public abstract class Weapon : MonoBehaviour //base class for all weapons
         Destroy(recalledBullet);
         BulletCount++;
         StartCoroutine(EnergyLoss());
+        StartCoroutine(RecallAnimation());
     }
 
     IEnumerator FireCooldown() //makes sure weapon can't be fired again before the rate of fire has elapsed
@@ -87,6 +92,22 @@ public abstract class Weapon : MonoBehaviour //base class for all weapons
         HasExcessEnergy = true;
         yield return new WaitForSeconds(energyLossSpeed);
         HasExcessEnergy = false;
+        yield break;
+    }
+
+    IEnumerator FireAnimation()
+    {
+        animator.SetBool("Is Firing", true);
+        yield return null;
+        animator.SetBool("Is Firing", false);
+        yield break;
+    }
+
+    IEnumerator RecallAnimation()
+    {
+        animator.SetBool("Is Recalling", true);
+        yield return null;
+        animator.SetBool("Is Recalling", false);
         yield break;
     }
 }
