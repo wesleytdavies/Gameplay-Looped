@@ -12,10 +12,5 @@ public class PistolBullet : LoopableObject
         Speed = .25f;
         movementFunction = Linear;
         DamagePerSecond = 1f;
-        if (isPowered)
-        {
-            Speed *= powerShotFactor;
-            DamagePerSecond *= powerShotFactor;
-        }
     }
 }

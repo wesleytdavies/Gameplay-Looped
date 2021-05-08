@@ -12,10 +12,11 @@ public class PlayerWeaponRotation : MonoBehaviour
     private float _rotationAngle;
 
     [SerializeField] private GameObject holder;
+    private SpriteRenderer weaponSpriteRenderer;
 
     void Start()
     {
-        
+        weaponSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     void Update()
@@ -36,11 +37,20 @@ public class PlayerWeaponRotation : MonoBehaviour
             flipScale.y = -1;
             transform.localScale = flipScale;
         }
-        else if (RotationAngle < 90 && RotationAngle > -90)
+        else
         {
             flipScale = transform.localScale;
             flipScale.y = 1;
             transform.localScale = flipScale;
+        }
+
+        if (RotationAngle >= 0 && RotationAngle <= 180)
+        {
+            weaponSpriteRenderer.sortingOrder = -1;
+        }
+        else
+        {
+            weaponSpriteRenderer.sortingOrder = 1;
         }
     }
 

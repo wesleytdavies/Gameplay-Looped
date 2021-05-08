@@ -76,12 +76,21 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
 
     public GameObject originator; //the gameobject that brought this loopable object into existence (i.e. the gun that fired this bullet)
 
-    private void Start()
+    private void Awake()
     {
         Initialize();
         movementFunction.Initialize(this);
         forwardCoroutine = movementFunction.ForwardMovement(this);
         reverseCoroutine = movementFunction.ReverseMovement(this);
+    }
+
+    private void Start()
+    {
+        if (isPowered)
+        {
+            Speed *= powerShotFactor;
+            DamagePerSecond *= powerShotFactor;
+        }
         StartCoroutine(TimeLoop());
     }
 
