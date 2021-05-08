@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 975505989108972842}
   - component: {fileID: 3407919346794885179}
   - component: {fileID: -925278439575907429}
-  - component: {fileID: -226461024454818130}
+  - component: {fileID: 8837369950477110949}
   m_Layer: 8
   m_Name: Pistol Bullet
   m_TagString: Untagged
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 86dc5aad5be6f4d5d8de4ea575b6f6a1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 66c37a247fc684520bbba48b619626a4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,9 +95,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af90c40c3f5e45a9a5a103b65a44ca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPowered: 0
   originator: {fileID: 0}
---- !u!58 &-226461024454818130
-CircleCollider2D:
+--- !u!61 &8837369950477110949
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -110,5 +111,15 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1, y: 0.5}
+  m_EdgeRadius: 0
