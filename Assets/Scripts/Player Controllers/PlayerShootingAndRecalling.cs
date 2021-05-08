@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerShootingAndRecalling : MonoBehaviour
 {
-    private static readonly float recallRadius = 1f; //how far away the bullet can be from the barrel to be recalled
+    private static readonly float recallRadius = 0.75f; //how far away the bullet can be from the barrel to be recalled
 
     private Weapon currentWeapon;
     private GameObject currentWeaponObject;
@@ -25,11 +25,26 @@ public class PlayerShootingAndRecalling : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            if (currentWeapon.bulletCount > 0)
+            if (currentWeapon.BulletCount > 0)
             {
-                currentWeapon.Fire();
+                if (!currentWeapon.IsCoolingDown)
+                {
+                    if (currentWeapon.HasExcessEnergy)
+                    {
+                        currentWeapon.Fire(true);
+                    }
+                    else
+                    {
+                        currentWeapon.Fire(false);
+                    }
+                }
+            }
+            else
+            {
+                //play click sound (out of ammo)
             }
         }
+
         if (Input.GetButtonDown("Fire2"))
         {
             Collider2D[] nearbyObjects = Physics2D.OverlapCircleAll(currentWeapon.Barrel.position, recallRadius);
