@@ -22,7 +22,7 @@ public class Health : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)

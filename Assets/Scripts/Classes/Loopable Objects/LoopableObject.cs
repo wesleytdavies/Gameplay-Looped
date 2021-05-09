@@ -25,20 +25,31 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
     }
     private float _halfLoopDuration = 1f; //the default one way time is 1 seconds
 
-    private IEnumerator forwardCoroutine;
-    private IEnumerator reverseCoroutine;
+    protected IEnumerator ForwardCoroutine
+    {
+        get => _forwardCoroutine;
+        private set => _forwardCoroutine = value;
+    }
+    private IEnumerator _forwardCoroutine;
+
+    protected IEnumerator ReverseCoroutine
+    {
+        get => _reverseCoroutine;
+        private set => _reverseCoroutine = value;
+    }
+    private IEnumerator _reverseCoroutine;
 
     public float InternalTime //the lifespan of the object
     {
         get => _internalTime;
-        private set => _internalTime = value;
+        protected set => _internalTime = value;
     }
     private float _internalTime;
 
     public bool IsReversing //whether the object is reversing on its loop
     {
         get => _isReversing;
-        private set => _isReversing = value;
+        protected set => _isReversing = value;
     }
     private bool _isReversing;
 
@@ -80,6 +91,12 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
         private set => _expanding = value;
     }
     private ExpandingMovement _expanding = new ExpandingMovement();
+    protected StretchingMovement Stretching
+    {
+        get => _stretching;
+        private set => _stretching = value;
+    }
+    private StretchingMovement _stretching = new StretchingMovement();
     #endregion
 
     public GameObject originator; //the gameobject that brought this loopable object into existence (i.e. the gun that fired this bullet)
@@ -89,8 +106,8 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
     {
         Initialize();
         movementFunction.Initialize(this);
-        forwardCoroutine = movementFunction.ForwardMovement(this);
-        reverseCoroutine = movementFunction.ReverseMovement(this);
+        ForwardCoroutine = movementFunction.ForwardMovement(this);
+        ReverseCoroutine = movementFunction.ReverseMovement(this);
     }
 
     private void Start()
@@ -127,13 +144,13 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
 
     public virtual void MoveForward()
     {
-        StopCoroutine(reverseCoroutine);
-        StartCoroutine(forwardCoroutine);
+        StopCoroutine(ReverseCoroutine);
+        StartCoroutine(ForwardCoroutine);
     }
 
     public virtual void MoveReverse()
     {
-        StopCoroutine(forwardCoroutine);
-        StartCoroutine(reverseCoroutine);
+        StopCoroutine(ForwardCoroutine);
+        StartCoroutine(ReverseCoroutine);
     }
 }
