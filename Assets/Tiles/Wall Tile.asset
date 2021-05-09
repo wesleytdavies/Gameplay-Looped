@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: Wall Tile
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: 2973618161611246603, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  - {fileID: 9208702383505575971, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  - {fileID: 6691848170880079907, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  - {fileID: -1412141165050073737, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  - {fileID: -6861059192170189322, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  - {fileID: 1904232451484660219, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  - {fileID: 7211080497907601727, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  - {fileID: -6692736857419219977, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  - {fileID: -7131549432282010463, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  - {fileID: 2530144071862867948, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  - {fileID: -2070257169365926749, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  - {fileID: -8983150183894799506, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  - {fileID: 1029013096358671739, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  - {fileID: -533985531418529652, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  - {fileID: -1702144393831740453, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  - {fileID: -6167016166482599966, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  - {fileID: -1550310478216033099, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  - {fileID: 3439690672375404967, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  - {fileID: 9218785106877064848, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  - {fileID: 4399039394566077996, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  - {fileID: -5831436008228956611, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  - {fileID: -8030298390651739884, guid: 9628954757d484ae0bff444bf646271a, type: 3}
+  m_MinSpeed: 8
+  m_MaxSpeed: 8
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 2
