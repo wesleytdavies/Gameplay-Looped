@@ -23,7 +23,7 @@ public class SpiralMovement : LoopableMovement //creates a circle that expands w
             if (loopableObject.InternalTime <= loopableObject.HalfLoopDuration) //this must be in an if statement since the internal time goes one frame past the half loop duration which messes up the easing (object starts to move backwards before it has reversed)
             {
                 Vector2 currentPosition = new Vector2(loopableObject.transform.position.x, loopableObject.transform.position.y);
-                float easingFactor = EaseOutQuadratic(loopableObject.InternalTime / loopableObject.HalfLoopDuration);
+                //float easingFactor = EaseOutQuadratic(loopableObject.InternalTime / loopableObject.HalfLoopDuration);
                 float xDelta = circleCenter.x + Mathf.Cos(loopableObject.InternalTime * loopableObject.Speed * 10f) * circleRadius;
                 float yDelta = circleCenter.y - Mathf.Sin(loopableObject.InternalTime * loopableObject.Speed * 10f) * circleRadius;
                 loopableObject.transform.position = new Vector3(xDelta, yDelta, 0);
@@ -47,7 +47,7 @@ public class SpiralMovement : LoopableMovement //creates a circle that expands w
                 loopableObject.transform.position = reverseVector;
                 */
                 Vector2 currentPosition = new Vector2(loopableObject.transform.position.x, loopableObject.transform.position.y);
-                float easingFactor = EaseOutQuadratic(loopableObject.InternalTime / loopableObject.HalfLoopDuration);
+                //float easingFactor = EaseOutQuadratic(loopableObject.InternalTime / loopableObject.HalfLoopDuration);
                 float xDelta = circleCenter.x - Mathf.Cos((loopableObject.HalfLoopDuration - loopableObject.InternalTime) * loopableObject.Speed * 10f) * circleRadius;
                 float yDelta = circleCenter.y + Mathf.Sin((loopableObject.HalfLoopDuration - loopableObject.InternalTime) * loopableObject.Speed * 10f) * circleRadius;
                 loopableObject.transform.position = new Vector3(xDelta, yDelta, 0);

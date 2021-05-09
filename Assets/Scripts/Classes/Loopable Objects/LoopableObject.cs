@@ -25,28 +25,6 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
     }
     private float _halfLoopDuration = 1f; //the default one way time is 1 seconds
 
-    protected LoopableMovement movementFunction; //the movement algorithm the object adheres to
-
-    //references to all movement functions:
-    protected LinearMovement Linear
-    {
-        get => _linear;
-        private set => _linear = value;
-    }
-    private LinearMovement _linear = new LinearMovement();
-    protected SpiralMovement Spiral
-    {
-        get => _spiral;
-        private set => _spiral = value;
-    }
-    private SpiralMovement _spiral = new SpiralMovement();
-    protected ExpandingMovement Expanding
-    {
-        get => _expanding;
-        private set => _expanding = value;
-    }
-    private ExpandingMovement _expanding = new ExpandingMovement();
-
     private IEnumerator forwardCoroutine;
     private IEnumerator reverseCoroutine;
 
@@ -71,10 +49,41 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
     }
     private float _damagePerSecond;
 
+    public float EndSize //if changing sizes, how many times bigger/smaller this object is at the end of its loop
+    {
+        get => _endSize;
+        protected set => _endSize = value;
+    }
+    private float _endSize;
+
     public bool isPowered; //if yes, the speed of this loopable object is increased by a factor of powerShotFactor
     protected static readonly float powerShotFactor = 1.5f; //powered shots are 1.5 times faster than normal shots
 
+    protected LoopableMovement movementFunction; //the movement algorithm the object adheres to
+
+    #region movement functions
+    protected LinearMovement Linear
+    {
+        get => _linear;
+        private set => _linear = value;
+    }
+    private LinearMovement _linear = new LinearMovement();
+    protected SpiralMovement Spiral
+    {
+        get => _spiral;
+        private set => _spiral = value;
+    }
+    private SpiralMovement _spiral = new SpiralMovement();
+    protected ExpandingMovement Expanding
+    {
+        get => _expanding;
+        private set => _expanding = value;
+    }
+    private ExpandingMovement _expanding = new ExpandingMovement();
+    #endregion
+
     public GameObject originator; //the gameobject that brought this loopable object into existence (i.e. the gun that fired this bullet)
+    private Animator animator;
 
     private void Awake()
     {
@@ -99,7 +108,7 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
         InternalTime += Time.fixedDeltaTime;
     }
 
-    IEnumerator TimeLoop()
+    protected virtual IEnumerator TimeLoop()
     {
         while (true)
         {
