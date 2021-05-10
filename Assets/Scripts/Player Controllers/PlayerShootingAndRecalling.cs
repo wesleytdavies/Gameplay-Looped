@@ -56,7 +56,7 @@ public class PlayerShootingAndRecalling : MonoBehaviour
                 {
                     if (nearbyObjects[i].GetComponent<LoopableObject>().IsReversing)
                     {
-                        if (nearbyObjects[i].GetComponent<LoopableObject>().originator = currentWeaponObject)
+                        if (nearbyObjects[i].GetComponent<LoopableObject>().originator == currentWeaponObject)
                         {
                             currentWeapon.Recall(nearbyObjects[i].gameObject);
                             return; //prevents recalling multiple bullets at once
