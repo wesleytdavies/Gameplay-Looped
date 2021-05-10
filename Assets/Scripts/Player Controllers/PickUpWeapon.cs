@@ -1,16 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PickUpWeapon : MonoBehaviour
 {
     private Inventory inventory;
     private PlayerRotation playerRotation;
+    private GameObject swapWeaponsText;
+    private TextMeshProUGUI textMeshProUGUI;
 
     void Start()
     {
         inventory = GetComponent<Inventory>();
         playerRotation = GetComponent<PlayerRotation>();
+        swapWeaponsText = GameObject.Find("Swap Weapons Text");
+        textMeshProUGUI = swapWeaponsText.GetComponent<TextMeshProUGUI>();
     }
 
     void Update()
@@ -24,13 +29,18 @@ public class PickUpWeapon : MonoBehaviour
         {
             if(collision.GetComponent<Weapon>().holder == null)
             {
-                //tell player to "Press E to Swap Weapons"
+                textMeshProUGUI.text = "Press 'E' to Swap Weapons";
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     SwitchWeapons(collision.GetComponent<Weapon>());
                 }
             }
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        textMeshProUGUI.text = "";
     }
 
     private void SwitchWeapons(Weapon weapon)

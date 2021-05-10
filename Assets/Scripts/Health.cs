@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private float maxHitPoints;
+    public float maxHitPoints;
     public float currentHitPoints;
     private static readonly int damagingLayer = 8;
 
