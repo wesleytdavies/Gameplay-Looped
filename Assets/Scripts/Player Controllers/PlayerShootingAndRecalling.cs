@@ -6,6 +6,11 @@ public class PlayerShootingAndRecalling : MonoBehaviour
 {
     private static readonly float recallRadius = 0.75f; //how far away the bullet can be from the barrel to be recalled
 
+    private float cameraBaseSize; //normal size of the camera
+    private float cameraMinSize; //size of the camera at its most zoomed in
+    private float zoomTime; //how long the camera has been zooming
+    [SerializeField] private float zoomDuration; //how long the camera takes to zoom in/out in seconds. zoomDuration * 2 is the duration of CameraZoom()
+
     private Weapon currentWeapon;
     private GameObject currentWeaponObject;
     private Inventory inventory;
@@ -19,6 +24,8 @@ public class PlayerShootingAndRecalling : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
+        cameraBaseSize = mainCamera.orthographicSize;
+        cameraMinSize = cameraBaseSize - 1;
     }
 
     void Update()
@@ -34,6 +41,7 @@ public class PlayerShootingAndRecalling : MonoBehaviour
                     if (currentWeapon.HasExcessEnergy)
                     {
                         currentWeapon.Fire(true);
+                        StartCoroutine(CameraZoom());
                     }
                     else
                     {
@@ -69,6 +77,22 @@ public class PlayerShootingAndRecalling : MonoBehaviour
 
     IEnumerator CameraZoom()
     {
-        yield return null;
+        zoomTime = 0f;
+        while (zoomTime <= zoomDuration)
+        {
+            zoomTime += Time.deltaTime;
+            mainCamera.orthographicSize = Mathf.Lerp(cameraBaseSize, cameraMinSize, zoomTime / zoomDuration);
+            yield return null;
+        }
+        while (zoomTime > zoomDuration && zoomTime <= zoomDuration * 2)
+        {
+            zoomTime += Time.deltaTime;
+            mainCamera.orthographicSize = Mathf.Lerp(cameraMinSize, cameraBaseSize, zoomTime / (zoomDuration * 2));
+            yield return null;
+        }
+        if (zoomTime > zoomDuration * 2)
+        {
+            yield break;
+        }
     }
 }
