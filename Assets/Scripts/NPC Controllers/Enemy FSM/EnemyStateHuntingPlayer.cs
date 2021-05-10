@@ -4,41 +4,51 @@ using UnityEngine;
 
 public class EnemyStateHuntingPlayer : EnemyState
 {
+    private bool isHunting; //whether or not the enemy is currently hunting the player
+
     public override void Enter(Unit unit)
     {
         unit.target = unit.player.transform;
         hasPath = false;
         unit.mustPathfind = false;
+        isHunting = false;
     }
 
     public override void Update(Unit unit)
     {
         Vector2 distanceToTarget = new Vector2(unit.target.position.x - unit.Rb.position.x, unit.target.position.y - unit.Rb.position.y);
         float hypotenuseToTarget = Mathf.Sqrt(Mathf.Pow(distanceToTarget.x, 2) + Mathf.Pow(distanceToTarget.y, 2));
-        if (hypotenuseToTarget > unit.EnemyShootDistance)
+        if (hypotenuseToTarget < unit.EnemySightDistance)
         {
-            unit.mustPathfind = true;
-            if (!hasPath)
-            {
-                PathRequestManager.RequestPath(unit.Rb.position, unit.target.position, unit.OnPathFound);
-                hasPath = true;
-            }
-            if (unit.PlayerMovement.IsMoving)
-            {
-                hasPath = false;
-            }
+            isHunting = true;
         }
-        else
+        if (isHunting)
         {
-            unit.mustPathfind = false;
-            RaycastHit2D playerSightline = Physics2D.Raycast(unit.Rb.position, distanceToTarget, unit.EnemySightDistance, unit.PlayerMask);
-            RaycastHit2D wallSightline = Physics2D.Raycast(unit.Rb.position, distanceToTarget, unit.EnemySightDistance, unit.UnwalkableMask);
-            Debug.DrawRay(unit.Rb.position, distanceToTarget, Color.red);
-            if (playerSightline.collider != null && wallSightline.collider == null)
+            if (hypotenuseToTarget > unit.EnemyShootDistance)
             {
-                if (!unit.CurrentWeapon.IsCoolingDown)
+                unit.mustPathfind = true;
+                if (!hasPath)
                 {
-                    unit.CurrentWeapon.Fire(false);
+                    PathRequestManager.RequestPath(unit.Rb.position, unit.target.position, unit.OnPathFound);
+                    hasPath = true;
+                }
+                if (unit.PlayerMovement.IsMoving)
+                {
+                    hasPath = false;
+                }
+            }
+            else
+            {
+                RaycastHit2D playerSightline = Physics2D.Raycast(unit.Rb.position, distanceToTarget, unit.EnemySightDistance, unit.PlayerMask);
+                RaycastHit2D wallSightline = Physics2D.Raycast(unit.Rb.position, distanceToTarget, unit.EnemySightDistance, unit.UnwalkableMask);
+                Debug.DrawRay(unit.Rb.position, distanceToTarget, Color.red);
+                if (playerSightline.collider != null && wallSightline.collider == null)
+                {
+                    unit.mustPathfind = false;
+                    if (!unit.CurrentWeapon.IsCoolingDown)
+                    {
+                        unit.CurrentWeapon.Fire(false);
+                    }
                 }
             }
         }

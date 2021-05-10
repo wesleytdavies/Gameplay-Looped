@@ -7,7 +7,7 @@ public class EnemyCrossbow : Weapon
     public override void Initialize()
     {
         MagazineSize = 1;
-        rateOfFire = 0f;
+        rateOfFire = 1f;
         bullet = Resources.Load("Prefabs/" + EnemyCrossbowBolt.prefabName) as GameObject;
     }
 }

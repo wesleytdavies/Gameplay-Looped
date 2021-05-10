@@ -22,7 +22,10 @@ public class Health : MonoBehaviour
 
     void Update()
     {
-
+        if (currentHitPoints <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)

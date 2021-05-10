@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //credit to Sebastian Lague on YouTube for pathfinding tutorials
-public class Unit : MonoBehaviour
+public class Unit : MonoBehaviour //base class for pathfinding and enemy AI
 {
     public float recallRadius = 1f;
 
+    private Animator animator;
     public Transform target;
     public GameObject player;
     [SerializeField] private float speed;
@@ -69,6 +70,7 @@ public class Unit : MonoBehaviour
 
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         Rb = GetComponent<Rigidbody2D>();
         CurrentWeapon = GetComponentInChildren<Weapon>();
         target = player.transform;
@@ -83,6 +85,31 @@ public class Unit : MonoBehaviour
     private void Update()
     {
         currentState.Update(this);
+        if (mustPathfind)
+        {
+            animator.SetFloat("Walk Speed", 1f);
+        }
+        else
+        {
+            animator.SetFloat("Walk Speed", 0f);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        List<LoopableObject> firedBullets = new List<LoopableObject>();
+        LoopableObject[] allLoopableObjects = Object.FindObjectsOfType<LoopableObject>();
+        foreach (LoopableObject loopableObject in allLoopableObjects) //search through all loopable objects in the scene to find this enemy's fired bullets
+        {
+            if (loopableObject.originator == CurrentWeapon.gameObject)
+            {
+                firedBullets.Add(loopableObject);
+            }
+        }
+        foreach (LoopableObject bullet in firedBullets)
+        {
+            Destroy(bullet.gameObject);
+        }
     }
 
     public void ChangeState(EnemyState newState)

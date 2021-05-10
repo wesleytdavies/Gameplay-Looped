@@ -57,7 +57,7 @@ public class EnemyStateRecallingBullets : EnemyState
             fixTimer += Time.deltaTime;
             if (fixTimer > 3f)
             {
-                unit.recallRadius = 100f * Time.deltaTime;
+                unit.recallRadius = 100f + Time.deltaTime;
             }
         }
         previousPosition = currentPosition;
