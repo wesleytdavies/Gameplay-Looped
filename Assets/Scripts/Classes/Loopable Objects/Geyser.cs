@@ -12,7 +12,7 @@ public class Geyser : LoopableObject
         StartPosition = transform.position;
         EndSize = 80f;
         movementFunction = Stretching;
-        DamagePerSecond = 1f;
+        DamagePerFrame = 0.25f;
 
         boxCollider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();

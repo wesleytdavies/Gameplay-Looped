@@ -31,7 +31,7 @@ public class Health : MonoBehaviour
         {
             if (collision.GetComponent<LoopableObject>() != null)
             {
-                currentHitPoints -= collision.GetComponent<LoopableObject>().DamagePerSecond;
+                currentHitPoints -= collision.GetComponent<LoopableObject>().DamagePerFrame;
                 spriteRenderer.color = hitColor;
             }
         }

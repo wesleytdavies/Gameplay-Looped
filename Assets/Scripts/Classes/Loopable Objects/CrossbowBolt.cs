@@ -9,8 +9,8 @@ public class CrossbowBolt : LoopableObject
     public override void Initialize()
     {
         StartPosition = transform.position;
-        Speed = .25f;
+        Speed = .5f;
         movementFunction = Linear;
-        DamagePerSecond = 5f;
+        DamagePerFrame = 5f;
     }
 }

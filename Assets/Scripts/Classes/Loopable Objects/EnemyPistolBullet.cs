@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PistolBullet : LoopableObject
+public class EnemyPistolBullet : LoopableObject
 {
-    public static readonly string prefabName = "Pistol Bullet"; //name of prefab in the Resources folder
+    public static readonly string prefabName = "Enemy Pistol Bullet"; //name of prefab in the Resources folder
 
     public override void Initialize()
     {

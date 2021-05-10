@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PistolBullet : LoopableObject
+public class EnemyCrossbowBolt : LoopableObject
 {
-    public static readonly string prefabName = "Pistol Bullet"; //name of prefab in the Resources folder
+    public static readonly string prefabName = "Enemy Crossbow Bolt"; //name of prefab in the Resources folder
 
     public override void Initialize()
     {
         StartPosition = transform.position;
-        Speed = .25f;
+        Speed = .5f;
         movementFunction = Linear;
-        DamagePerFrame = 1f;
+        DamagePerFrame = 5f;
     }
 }

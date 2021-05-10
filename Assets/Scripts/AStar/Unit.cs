@@ -5,7 +5,7 @@ using UnityEngine;
 //credit to Sebastian Lague on YouTube for pathfinding tutorials
 public class Unit : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+    public Transform target;
     public float speed;
     Vector3[] path;
     int targetIndex;
@@ -23,6 +23,11 @@ public class Unit : MonoBehaviour
     private void Start()
     {
         PathRequestManager.RequestPath(rb.position, target.position, OnPathFound);
+    }
+
+    private void Update() //all the enemy's intelligence occurs in this update loop
+    {
+        
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)

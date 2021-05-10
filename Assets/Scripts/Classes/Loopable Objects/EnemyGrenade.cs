@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grenade : LoopableObject
+public class EnemyGrenade : LoopableObject
 {
-    public static readonly string prefabName = "Grenade"; //name of prefab in the Resources folder
+    public static readonly string prefabName = "Enemy Grenade"; //name of prefab in the Resources folder
 
     private Animator animator;
 

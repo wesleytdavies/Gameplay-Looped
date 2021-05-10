@@ -42,12 +42,12 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
     }
     private bool _isReversing;
 
-    public float DamagePerSecond //how much damage this object inflicts per second of overlap
+    public float DamagePerFrame //how much damage this object inflicts per frame of overlap
     {
-        get => _damagePerSecond;
-        protected set => _damagePerSecond = value;
+        get => _damagePerFrame;
+        protected set => _damagePerFrame = value;
     }
-    private float _damagePerSecond;
+    private float _damagePerFrame;
 
     public float EndSize //if changing sizes, how many times bigger/smaller this object is at the end of its loop
     {
@@ -104,7 +104,7 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
         if (isPowered)
         {
             Speed *= powerShotFactor;
-            DamagePerSecond *= powerShotFactor;
+            DamagePerFrame *= powerShotFactor;
         }
         StartCoroutine(TimeLoop());
     }
