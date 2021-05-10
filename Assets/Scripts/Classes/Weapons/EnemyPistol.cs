@@ -7,7 +7,7 @@ public class EnemyPistol : Weapon
     public override void Initialize()
     {
         MagazineSize = 5;
-        rateOfFire = 0.25f;
+        rateOfFire = 1.3f;
         bullet = Resources.Load("Prefabs/" + EnemyPistolBullet.prefabName) as GameObject;
     }
 }

@@ -5,7 +5,14 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
-    private bool isMoving = false;
+
+    public bool IsMoving
+    {
+        get => _IsMoving;
+        private set => _IsMoving = value;
+    }
+    private bool _IsMoving;
+
     private Vector2 moveDirection;
 
     private Rigidbody2D rb;
@@ -13,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        IsMoving = false;
         moveDirection = Vector2.zero;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -23,60 +31,60 @@ public class PlayerMovement : MonoBehaviour
         //directional movement
         if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
         {
-            isMoving = true;
+            IsMoving = true;
             moveDirection.x = 1 / Mathf.Sqrt(2);
             moveDirection.y = 1 / Mathf.Sqrt(2);
         }
         else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
         {
-            isMoving = true;
+            IsMoving = true;
 
             moveDirection.x = -1 / Mathf.Sqrt(2);
             moveDirection.y = 1 / Mathf.Sqrt(2);
         }
         else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
         {
-            isMoving = true;
+            IsMoving = true;
 
             moveDirection.x = 1 / Mathf.Sqrt(2);
             moveDirection.y = -1 / Mathf.Sqrt(2);
         }
         else if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
         {
-            isMoving = true;
+            IsMoving = true;
             moveDirection.x = -1 / Mathf.Sqrt(2);
             moveDirection.y = -1 / Mathf.Sqrt(2);
         }
         else if (Input.GetKey(KeyCode.W))
         {
-            isMoving = true;
+            IsMoving = true;
             moveDirection.x = 0;
             moveDirection.y = 1;
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            isMoving = true;
+            IsMoving = true;
             moveDirection.x = 0;
             moveDirection.y = -1;
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            isMoving = true;
+            IsMoving = true;
             moveDirection.x = 1;
             moveDirection.y = 0;
         }
         else if (Input.GetKey(KeyCode.A))
         {
-            isMoving = true;
+            IsMoving = true;
             moveDirection.x = -1;
             moveDirection.y = 0;
         }
         else
         {
-            isMoving = false;
+            IsMoving = false;
             rb.velocity = new Vector2(0, 0);
         }
-        if (isMoving)
+        if (IsMoving)
         {
             rb.velocity = new Vector2(moveSpeed * moveDirection.x, moveSpeed * moveDirection.y);
             animator.SetFloat("Walk Speed", 1f);
