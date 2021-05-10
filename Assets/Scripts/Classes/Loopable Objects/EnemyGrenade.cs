@@ -11,7 +11,7 @@ public class EnemyGrenade : LoopableObject
     public override void Initialize()
     {
         StartPosition = transform.position;
-        Speed = .25f;
+        Speed = 1f;
         EndSize = 10f;
         movementFunction = Linear;
         DamagePerFrame = 1f;
@@ -26,13 +26,12 @@ public class EnemyGrenade : LoopableObject
         while (true)
         {
             InternalTime = 0f; //reset internal time
-            MoveForward();
             IsReversing = false;
+            MoveForward();
             yield return new WaitUntil(() => InternalTime >= HalfLoopDuration); //wait until half a loop has elapsed
             InternalTime = 0f; //reset internal time
             StopCoroutine(forwardCoroutine);
             movementFunction = Expanding;
-            DamagePerFrame = 3f;
             forwardCoroutine = movementFunction.ForwardMovement(this);
             reverseCoroutine = movementFunction.ReverseMovement(this);
             MoveForward();
@@ -45,12 +44,11 @@ public class EnemyGrenade : LoopableObject
             InternalTime = 0f; //reset internal time
             StopCoroutine(reverseCoroutine);
             movementFunction = Linear;
-            DamagePerFrame = 1f;
             forwardCoroutine = movementFunction.ForwardMovement(this);
             reverseCoroutine = movementFunction.ReverseMovement(this);
-            MoveReverse();
-            IsReversing = true;
             animator.SetInteger("State", 0);
+            IsReversing = true;
+            MoveReverse();
             yield return new WaitUntil(() => InternalTime >= HalfLoopDuration); //wait until half a loop has elapsed
         }
     }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class LinearMovement : LoopableMovement //used for objects that move in a straight line at a constant speed
 {
     private Vector2 upVector;
+    private Vector2 endPosition;
 
     public override void Initialize(LoopableObject loopableObject)
     {
@@ -17,10 +18,8 @@ public class LinearMovement : LoopableMovement //used for objects that move in a
         {
             if(loopableObject.InternalTime <= loopableObject.HalfLoopDuration) //this must be in an if statement since the internal time goes one frame past the half loop duration which messes up the easing (object starts to move backwards before it has reversed)
             {
-                Vector2 currentPosition = new Vector2(loopableObject.transform.position.x, loopableObject.transform.position.y);
-                float easingFactor = EaseOutQuadraticFactor(loopableObject.InternalTime / loopableObject.HalfLoopDuration);
-                Vector2 forwardVector = currentPosition + upVector * loopableObject.Speed * easingFactor;
-                loopableObject.transform.position = forwardVector;
+                endPosition = loopableObject.StartPosition + upVector * loopableObject.Speed * (loopableObject.HalfLoopDuration / Time.maximumDeltaTime);
+                loopableObject.transform.position = EaseOutQuadraticVector2(loopableObject.StartPosition, endPosition, loopableObject.InternalTime / loopableObject.HalfLoopDuration);
             }
             yield return new WaitForFixedUpdate(); //increment time at a fixed rate to ensure coroutine timings are perfect
         }
@@ -32,10 +31,8 @@ public class LinearMovement : LoopableMovement //used for objects that move in a
         {
             if(loopableObject.InternalTime <= loopableObject.HalfLoopDuration) //this must be in an if statement since the internal time goes one frame past the half loop duration which messes up the easing (object starts to move backwards before it has reversed)
             {
-                Vector2 currentPosition = new Vector2(loopableObject.transform.position.x, loopableObject.transform.position.y);
-                float easingFactor = EaseInQuadraticFactor(loopableObject.InternalTime / loopableObject.HalfLoopDuration);
-                Vector2 reverseVector = currentPosition - upVector * loopableObject.Speed * easingFactor;
-                loopableObject.transform.position = reverseVector;
+                endPosition = loopableObject.StartPosition + upVector * loopableObject.Speed * (loopableObject.HalfLoopDuration / Time.maximumDeltaTime);
+                loopableObject.transform.position = EaseInQuadraticVector2(endPosition, loopableObject.StartPosition, loopableObject.InternalTime / loopableObject.HalfLoopDuration);
             }
             yield return new WaitForFixedUpdate(); //increment time at a fixed rate to ensure coroutine timings are perfect
         }
