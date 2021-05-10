@@ -84,6 +84,11 @@ public class Unit : MonoBehaviour //base class for pathfinding and enemy AI
 
     private void Update()
     {
+        if (gameObject == null)
+        {
+            return;
+        }
+
         currentState.Update(this);
         if (mustPathfind)
         {

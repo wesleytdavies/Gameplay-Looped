@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyStateHuntingPlayer : EnemyState
 {
     private bool isHunting; //whether or not the enemy is currently hunting the player
+    private float timer; //used to not call A* every frame
 
     public override void Enter(Unit unit)
     {
@@ -29,12 +30,17 @@ public class EnemyStateHuntingPlayer : EnemyState
                 unit.mustPathfind = true;
                 if (!hasPath)
                 {
+                    timer = 0f;
                     PathRequestManager.RequestPath(unit.Rb.position, unit.target.position, unit.OnPathFound);
                     hasPath = true;
                 }
                 if (unit.PlayerMovement.IsMoving)
                 {
-                    hasPath = false;
+                    timer += Time.fixedDeltaTime;
+                    if (timer >= 1f)
+                    {
+                        hasPath = false;
+                    }
                 }
             }
             else
