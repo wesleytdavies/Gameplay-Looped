@@ -6,6 +6,8 @@ public class Grenade : LoopableObject
 {
     public static readonly string prefabName = "Grenade"; //name of prefab in the Resources folder
 
+    private Animator animator;
+
     public override void Initialize()
     {
         StartPosition = transform.position;
@@ -15,6 +17,8 @@ public class Grenade : LoopableObject
         DamagePerSecond = 1f;
 
         HalfLoopDuration = 0.5f;
+        Expanding.Initialize(this);
+        animator = GetComponent<Animator>();
     }
 
     protected override IEnumerator TimeLoop()
@@ -26,20 +30,25 @@ public class Grenade : LoopableObject
             IsReversing = false;
             yield return new WaitUntil(() => InternalTime >= HalfLoopDuration); //wait until half a loop has elapsed
             InternalTime = 0f; //reset internal time
+            StopCoroutine(forwardCoroutine);
             movementFunction = Expanding;
             forwardCoroutine = movementFunction.ForwardMovement(this);
             reverseCoroutine = movementFunction.ReverseMovement(this);
             MoveForward();
+            animator.SetInteger("State", 1);
             yield return new WaitUntil(() => InternalTime >= HalfLoopDuration); //wait until half a loop has elapsed
             InternalTime = 0f; //reset internal time
             MoveReverse();
+            animator.SetInteger("State", 2);
             yield return new WaitUntil(() => InternalTime >= HalfLoopDuration); //wait until half a loop has elapsed
             InternalTime = 0f; //reset internal time
+            StopCoroutine(reverseCoroutine);
             movementFunction = Linear;
             forwardCoroutine = movementFunction.ForwardMovement(this);
             reverseCoroutine = movementFunction.ReverseMovement(this);
             MoveReverse();
             IsReversing = true;
+            animator.SetInteger("State", 0);
             yield return new WaitUntil(() => InternalTime >= HalfLoopDuration); //wait until half a loop has elapsed
         }
     }
