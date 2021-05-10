@@ -2,4 +2,12 @@ Revover asset credits:
 
 Explosion sprite: https://opengameart.org/content/pixel-explosion-12-frames
 
+Pistol sound: https://www.youtube.com/watch?v=lHf6RwHO5dQ&ab_channel=Slek
+
+Grenade launcher sound: https://www.youtube.com/watch?v=LZ8epUnnO3U&ab_channel=KanoTheClan
+
+Explosion sound: https://www.youtube.com/watch?v=XjOtGgxaX5g&ab_channel=studioboys4realcoverstudioboys4realcover
+
+Crossbow sound: https://www.youtube.com/watch?v=PkFWphdqu2k&ab_channel=SoundLibrarySoundLibrary
+
 Everything else made by Wesley Davies

@@ -50,6 +50,9 @@ public abstract class Weapon : MonoBehaviour //base class for all weapons
     private bool _hasExcessEnergy = false;
 
     private Animator animator;
+    private AudioSource audioSource;
+    public AudioClip fire;
+    public AudioClip recall;
 
     private void Awake()
     {
@@ -57,6 +60,7 @@ public abstract class Weapon : MonoBehaviour //base class for all weapons
         Barrel = gameObject.transform.Find(barrelName).transform; //finds the barrel's transform, which must be a child of weapon
         BulletCount = MagazineSize;
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public abstract void Initialize();
@@ -69,6 +73,8 @@ public abstract class Weapon : MonoBehaviour //base class for all weapons
         BulletCount--;
         StartCoroutine(FireCooldown());
         StartCoroutine(FireAnimation());
+        audioSource.clip = fire;
+        audioSource.Play();
     }
 
     public virtual void Recall(GameObject recalledBullet) //if facing one of this weapon's reversing bullets, can recall and load it back into magazine
@@ -77,6 +83,8 @@ public abstract class Weapon : MonoBehaviour //base class for all weapons
         BulletCount++;
         StartCoroutine(EnergyLoss());
         StartCoroutine(RecallAnimation());
+        audioSource.clip = recall;
+        audioSource.Play();
     }
 
     IEnumerator FireCooldown() //makes sure weapon can't be fired again before the rate of fire has elapsed

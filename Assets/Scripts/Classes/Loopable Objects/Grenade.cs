@@ -7,6 +7,9 @@ public class Grenade : LoopableObject
     public static readonly string prefabName = "Grenade"; //name of prefab in the Resources folder
 
     private Animator animator;
+    private AudioSource audioSource;
+    public AudioClip explosion;
+    public AudioClip reverseExplosion;
 
     public override void Initialize()
     {
@@ -18,6 +21,7 @@ public class Grenade : LoopableObject
         HalfLoopDuration = 0.5f;
         Expanding.Initialize(this);
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     protected override IEnumerator TimeLoop()
@@ -35,10 +39,14 @@ public class Grenade : LoopableObject
             reverseCoroutine = movementFunction.ReverseMovement(this);
             MoveForward();
             animator.SetInteger("State", 1);
+            audioSource.clip = explosion;
+            audioSource.Play();
             yield return new WaitUntil(() => InternalTime >= HalfLoopDuration); //wait until half a loop has elapsed
             InternalTime = 0f; //reset internal time
             MoveReverse();
             animator.SetInteger("State", 2);
+            audioSource.clip = reverseExplosion;
+            audioSource.Play();
             yield return new WaitUntil(() => InternalTime >= HalfLoopDuration); //wait until half a loop has elapsed
             InternalTime = 0f; //reset internal time
             StopCoroutine(reverseCoroutine);
