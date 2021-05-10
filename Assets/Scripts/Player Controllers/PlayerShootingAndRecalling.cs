@@ -9,6 +9,7 @@ public class PlayerShootingAndRecalling : MonoBehaviour
     private Weapon currentWeapon;
     private GameObject currentWeaponObject;
     private Inventory inventory;
+    private Camera mainCamera;
 
     private void Awake()
     {
@@ -17,12 +18,13 @@ public class PlayerShootingAndRecalling : MonoBehaviour
 
     void Start()
     {
-        currentWeaponObject = inventory.WeaponInventory[0];
-        currentWeapon = currentWeaponObject.GetComponent<Weapon>();
+        mainCamera = Camera.main;
     }
 
     void Update()
     {
+        currentWeaponObject = inventory.weaponInventory[0];
+        currentWeapon = currentWeaponObject.GetComponent<Weapon>();
         if (Input.GetButtonDown("Fire1"))
         {
             if (currentWeapon.BulletCount > 0)
@@ -63,5 +65,10 @@ public class PlayerShootingAndRecalling : MonoBehaviour
                 }
             }
         }
+    }
+
+    IEnumerator CameraZoom()
+    {
+        yield return null;
     }
 }

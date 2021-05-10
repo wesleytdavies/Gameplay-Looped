@@ -22,7 +22,7 @@ public abstract class Weapon : MonoBehaviour //base class for all weapons
 
     protected GameObject bullet; //the bullet prefab the weapon shoots
 
-    [SerializeField] private GameObject holder; //the character holding this instance of the weapon
+    public GameObject holder; //the character holding this instance of the weapon
 
     public Transform Barrel //the location where the bullet is shot from. Weapon must have a child named [barrelName]
     {

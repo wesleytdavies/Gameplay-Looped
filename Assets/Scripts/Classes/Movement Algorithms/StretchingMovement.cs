@@ -14,7 +14,6 @@ public class StretchingMovement : LoopableMovement //object stretches in one dir
         collider = loopableObject.GetComponent<BoxCollider2D>();
         startSize = collider.size;
         endHeight = collider.size.y * loopableObject.EndSize;
-        Debug.Log(endHeight);
     }
 
     public override IEnumerator ForwardMovement(LoopableObject loopableObject)

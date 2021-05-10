@@ -6,16 +6,16 @@ public class PlayerRotation : MonoBehaviour
 {
     private Animator animator;
     private PlayerWeaponRotation weaponRotation;
-    [SerializeField] private GameObject weaponOrigin;
+    public GameObject weaponOrigin;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        weaponRotation = weaponOrigin.GetComponent<PlayerWeaponRotation>();
     }
 
     void Update()
     {
+        weaponRotation = weaponOrigin.GetComponent<PlayerWeaponRotation>();
         animator.SetFloat("Facing", weaponRotation.RotationAngle);
     }
 }

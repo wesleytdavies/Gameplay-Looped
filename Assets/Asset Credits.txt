@@ -1,0 +1,5 @@
+Revover asset credits:
+
+Explosion sprite: https://opengameart.org/content/pixel-explosion-12-frames
+
+Everything else made by Wesley Davies

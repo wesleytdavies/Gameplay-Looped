@@ -25,19 +25,8 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
     }
     private float _halfLoopDuration = 1f; //the default one way time is 1 seconds
 
-    protected IEnumerator ForwardCoroutine
-    {
-        get => _forwardCoroutine;
-        private set => _forwardCoroutine = value;
-    }
-    private IEnumerator _forwardCoroutine;
-
-    protected IEnumerator ReverseCoroutine
-    {
-        get => _reverseCoroutine;
-        private set => _reverseCoroutine = value;
-    }
-    private IEnumerator _reverseCoroutine;
+    protected IEnumerator forwardCoroutine;
+    protected IEnumerator reverseCoroutine;
 
     public float InternalTime //the lifespan of the object
     {
@@ -106,8 +95,8 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
     {
         Initialize();
         movementFunction.Initialize(this);
-        ForwardCoroutine = movementFunction.ForwardMovement(this);
-        ReverseCoroutine = movementFunction.ReverseMovement(this);
+        forwardCoroutine = movementFunction.ForwardMovement(this);
+        reverseCoroutine = movementFunction.ReverseMovement(this);
     }
 
     private void Start()
@@ -144,13 +133,13 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
 
     public virtual void MoveForward()
     {
-        StopCoroutine(ReverseCoroutine);
-        StartCoroutine(ForwardCoroutine);
+        StopCoroutine(reverseCoroutine);
+        StartCoroutine(forwardCoroutine);
     }
 
     public virtual void MoveReverse()
     {
-        StopCoroutine(ForwardCoroutine);
-        StartCoroutine(ReverseCoroutine);
+        StopCoroutine(forwardCoroutine);
+        StartCoroutine(reverseCoroutine);
     }
 }
