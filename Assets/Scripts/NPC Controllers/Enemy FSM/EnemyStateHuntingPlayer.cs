@@ -8,6 +8,7 @@ public class EnemyStateHuntingPlayer : EnemyState
     {
         unit.target = unit.player.transform;
         hasPath = false;
+        unit.mustPathfind = false;
     }
 
     public override void Update(Unit unit)

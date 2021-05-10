@@ -5,6 +5,8 @@ using UnityEngine;
 //credit to Sebastian Lague on YouTube for pathfinding tutorials
 public class Unit : MonoBehaviour
 {
+    public float recallRadius = 1f;
+
     public Transform target;
     public GameObject player;
     [SerializeField] private float speed;
@@ -75,7 +77,6 @@ public class Unit : MonoBehaviour
 
     private void Start()
     {
-        PathRequestManager.RequestPath(Rb.position, target.position, OnPathFound);
         ChangeState(stateHuntingPlayer);
     }
 

@@ -28,11 +28,14 @@ public class NPCWeaponRotation : MonoBehaviour
     {
         if (holder != null)
         {
-            Vector2 targetPosition = unit.target.position;
-            targetPosition.x -= transform.position.x;
-            targetPosition.y -= transform.position.y;
-            RotationAngle = Mathf.Atan2(targetPosition.y, targetPosition.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, RotationAngle));
+            if (unit.target != null)
+            {
+                Vector2 targetPosition = unit.target.position;
+                targetPosition.x -= transform.position.x;
+                targetPosition.y -= transform.position.y;
+                RotationAngle = Mathf.Atan2(targetPosition.y, targetPosition.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, RotationAngle));
+            }
 
             //put sprite either behind or in front of NPC
             if (RotationAngle >= 0 && RotationAngle <= 180)

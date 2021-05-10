@@ -10,7 +10,6 @@ public class EnemyGrenade : LoopableObject
 
     public override void Initialize()
     {
-        StartPosition = transform.position;
         Speed = 1f;
         EndSize = 10f;
         movementFunction = Linear;

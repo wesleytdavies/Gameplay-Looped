@@ -7,7 +7,7 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
     public Vector2 StartPosition //the position where the object begins its loop
     {
         get => _startPosition;
-        protected set => _startPosition = value;
+        private set => _startPosition = value;
     }
     private Vector2 _startPosition;
 
@@ -94,6 +94,7 @@ public abstract class LoopableObject : MonoBehaviour //base class for all object
     private void Awake()
     {
         Initialize();
+        StartPosition = transform.position;
         movementFunction.Initialize(this);
         forwardCoroutine = movementFunction.ForwardMovement(this);
         reverseCoroutine = movementFunction.ReverseMovement(this);

@@ -9,7 +9,6 @@ public class Geyser : LoopableObject
 
     public override void Initialize()
     {
-        StartPosition = transform.position;
         EndSize = 80f;
         movementFunction = Stretching;
         DamagePerFrame = 0.25f;
